@@ -155,13 +155,13 @@ export default {
     },
     theme (val) {
       const {map} = this
-      map.setMapStyle({styleJson: val})
+      map.setMapStyleV2({styleJson: val})
     },
     'mapStyle.features': {
       handler (val, oldVal) {
         const {map, mapStyle} = this
         const {style, styleJson} = mapStyle
-        map.setMapStyle({
+        map.setMapStyleV2({
           styleJson,
           features: val,
           style
@@ -172,7 +172,7 @@ export default {
     'mapStyle.style' (val, oldVal) {
       const {map, mapStyle} = this
       const {features, styleJson} = mapStyle
-      map.setMapStyle({
+      map.setMapStyleV2({
         styleJson,
         features,
         style: val
@@ -182,7 +182,7 @@ export default {
       handler (val, oldVal) {
         const {map, mapStyle} = this
         const {features, style} = mapStyle
-        map.setMapStyle({
+        map.setMapStyleV2({
           styleJson: val,
           features,
           style
@@ -192,7 +192,7 @@ export default {
     },
     mapStyle (val) {
       const {map, theme} = this
-      !theme && map.setMapStyle(val)
+      !theme && map.setMapStyleV2(val)
     }
   },
   methods: {
@@ -224,7 +224,7 @@ export default {
       const map = new BMap.Map($el, {enableHighResolution: this.highResolution, enableMapClick: this.mapClick})
       this.map = map
       const {setMapOptions, zoom, getCenterPoint, theme, mapStyle} = this
-      theme ? map.setMapStyle({styleJson: theme}) : map.setMapStyle(mapStyle)
+      theme ? map.setMapStyleV2({styleJson: theme}) : map.setMapStyleV2(mapStyle)
       setMapOptions()
       bindEvents.call(this, map)
       // 此处强行初始化一次地图 回避一个由于错误的 center 字符串导致初始化失败抛出的错误
@@ -260,7 +260,7 @@ export default {
           }
           const $script = document.createElement('script')
           global.document.body.appendChild($script)
-          $script.src = `https://api.map.baidu.com/api?v=2.0&ak=${ak}&callback=_initBaiduMap`
+          $script.src = `https://api.map.baidu.com/api?v=3.0&ak=${ak}&callback=_initBaiduMap`
         })
         return global.BMap._preloader
       } else if (!global.BMap._preloader) {
