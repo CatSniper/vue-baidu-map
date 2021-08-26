@@ -1,10 +1,11 @@
 {
-  "name": "vue-baidu-map-v3.0",
+  "name": "vue-baidu-map-3.0",
   "version": "0.1.0",
   "description": "Baidu Map Component for Vue 2.0",
   "main": "index.js",
   "directories": {
-    "doc": "docs"
+    "doc": "docs",
+    "test": "test"
   },
   "scripts": {
     "build:docs": "webpack -p --config ./build/webpack.docs.config.js",
